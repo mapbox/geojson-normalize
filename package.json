@@ -6,6 +6,9 @@
   "scripts": {
     "test": "tap test/*.js"
   },
+  "bin": {
+    "geojson-normalize": "geojson-normalize"
+  },
   "repository": {
     "type": "git",
     "url": "git@github.com:mapbox/geojson-normalize.git"
