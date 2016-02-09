@@ -4,7 +4,7 @@
   "description": "normalize different geojson forms into featurecollections",
   "main": "index.js",
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "eslint index.js && tap test/*.js"
   },
   "bin": {
     "geojson-normalize": "geojson-normalize"
@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/mapbox/geojson-normalize",
   "devDependencies": {
-    "tap": "~0.4.8"
+    "tap": "~0.4.8",
+    "eslint": "~1.00.0",
+    "eslint-config-unstyled": "^1.1.0"
   }
 }
