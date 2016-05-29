@@ -18,10 +18,15 @@ var types = {
  * @param {array} coordinates coordinates
  */
 function numberify(coordinates) {
-    console.log(coordinates);
     return coordinates.map(function(coord) {
-        if (coord.length) {
-            return coord.map(parseFloat);
+        if (coord.constructor === Array) {
+            return coord.map(function(c) {
+                if (c.constructor === Array) {
+                    return c.map(parseFloat);
+                } else {
+                    return parseFloat(c);
+                }
+            });
         } else {
             return parseFloat(coord);
         }
@@ -56,6 +61,10 @@ function normalize(gj) {
             features: [gj]
         };
     } else if (type === 'featurecollection') {
+        gj.features = gj.features.map(function(feature) {
+            feature.geometry.coordinates = numberify(feature.geometry.coordinates);
+            return feature;
+        });
         return gj;
     }
 }

@@ -13,5 +13,8 @@ test('normalize', function(t) {
     fixture(t, 'feature');
     fixture(t, 'geometry');
     fixture(t, 'featurecollection');
+    fixture(t, 'feature_string');
+    fixture(t, 'geometry_string');
+    fixture(t, 'featurecollection_string');
     t.end();
 });
