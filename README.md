@@ -6,7 +6,7 @@ Normalize any GeoJSON object into a GeoJSON FeatureCollection.
 
 ## install
 
-    npm install --save geojson-normalize
+    npm install --save @mapbox/geojson-normalize
 
 ## api
 
