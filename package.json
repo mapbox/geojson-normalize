@@ -1,5 +1,5 @@
 {
-  "name": "geojson-normalize",
+  "name": "@mapbox/geojson-normalize",
   "version": "0.0.1",
   "description": "normalize different geojson forms into featurecollections",
   "main": "index.js",
