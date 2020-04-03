@@ -44,7 +44,7 @@ function normalize(gj) {
   } else if (type === 'geometrycollection') {
     return {
       type: 'FeatureCollection',
-      features: gj.geometries.map(geometry => {
+      features: gj.geometries.map(function(geometry) {
         return {
           type: 'Feature',
           properties: {},
