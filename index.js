@@ -1,15 +1,15 @@
 module.exports = normalize;
 
 var types = {
-    Point: 'geometry',
-    MultiPoint: 'geometry',
-    LineString: 'geometry',
-    MultiLineString: 'geometry',
-    Polygon: 'geometry',
-    MultiPolygon: 'geometry',
-    GeometryCollection: 'geometry',
-    Feature: 'feature',
-    FeatureCollection: 'featurecollection'
+  Point: 'geometry',
+  MultiPoint: 'geometry',
+  LineString: 'geometry',
+  MultiLineString: 'geometry',
+  Polygon: 'geometry',
+  MultiPolygon: 'geometry',
+  GeometryCollection: 'geometrycollection',
+  Feature: 'feature',
+  FeatureCollection: 'featurecollection'
 };
 
 /**
@@ -19,25 +19,38 @@ var types = {
  * @returns {object} normalized geojson data
  */
 function normalize(gj) {
-    if (!gj || !gj.type) return null;
-    var type = types[gj.type];
-    if (!type) return null;
+  if (!gj || !gj.type) return null;
+  var type = types[gj.type];
+  if (!type) return null;
 
-    if (type === 'geometry') {
+  if (type === 'geometry') {
+    return {
+      type: 'FeatureCollection',
+      features: [
+        {
+          type: 'Feature',
+          properties: {},
+          geometry: gj
+        }
+      ]
+    };
+  } else if (type === 'feature') {
+    return {
+      type: 'FeatureCollection',
+      features: [gj]
+    };
+  } else if (type === 'featurecollection') {
+    return gj;
+  } else if (type === 'geometrycollection') {
+    return {
+      type: 'FeatureCollection',
+      features: gj.geometries.map(function(geometry) {
         return {
-            type: 'FeatureCollection',
-            features: [{
-                type: 'Feature',
-                properties: {},
-                geometry: gj
-            }]
+          type: 'Feature',
+          properties: {},
+          geometry: geometry
         };
-    } else if (type === 'feature') {
-        return {
-            type: 'FeatureCollection',
-            features: [gj]
-        };
-    } else if (type === 'featurecollection') {
-        return gj;
-    }
+      })
+    };
+  }
 }
